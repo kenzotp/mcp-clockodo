@@ -1,0 +1,23 @@
+{
+  "name": "mcp-clockodo",
+  "version": "0.1.0",
+  "description": "Unofficial MCP server for the Clockodo time-tracking API. Read tools for daily use, guarded write tools with explicit confirmation for destructive actions.",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "bin": { "mcp-clockodo": "dist/index.js" },
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "keywords": ["mcp", "clockodo", "time-tracking", "model-context-protocol"],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "tsx": "^4.19.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

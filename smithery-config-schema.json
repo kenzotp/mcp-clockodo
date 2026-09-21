@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "clockodoApiUser": { "type": "string", "title": "Clockodo API user (e-mail)", "description": "Your Clockodo API e-mail (Clockodo → Extensions → API)." },
+    "clockodoApiKey": { "type": "string", "title": "Clockodo API key", "description": "Your Clockodo API key (Clockodo → Extensions → API)." }
+  },
+  "required": ["clockodoApiUser", "clockodoApiKey"]
+}

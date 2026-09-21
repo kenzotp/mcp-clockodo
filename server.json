@@ -1,0 +1,27 @@
+{
+  "$schema": "https://cdn.jsdelivr.net/npm/@modelcontextprotocol/sdk@latest/schema/server.schema.json",
+  "name": "mcp-clockodo",
+  "display_name": "Clockodo MCP Server (unofficial)",
+  "description": "Unofficial MCP server for the Clockodo time-tracking API. Read tools for daily use, guarded write tools with explicit confirmation for destructive actions.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/kenzotp/mcp-clockodo"
+  },
+  "homepage": "https://github.com/kenzotp/mcp-clockodo",
+  "license": "MIT",
+  "authors": [
+    { "name": "Mika Niedbala" }
+  ],
+  "keywords": ["mcp", "clockodo", "time-tracking", "model-context-protocol"],
+  "server": {
+    "type": "stdio",
+    "command": {
+      "command": "npx",
+      "args": ["tsx", "src/index.ts"],
+      "env": {
+        "CLOCKODO_API_USER": "${user_config.clockodoApiUser}",
+        "CLOCKODO_API_KEY": "${user_config.clockodoApiKey}"
+      }
+    }
+  }
+}

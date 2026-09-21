@@ -1,0 +1,26 @@
+# Smithery configuration (https://smithery.ai)
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      clockodoApiUser:
+        type: string
+        title: Clockodo API user (e-mail)
+        description: Your Clockodo API e-mail address (Clockodo → Extensions → API).
+      clockodoApiKey:
+        type: string
+        title: Clockodo API key
+        description: Your Clockodo API key (Clockodo → Extensions → API).
+    required:
+      - clockodoApiUser
+      - clockodoApiKey
+  commandFunction: |-
+    (config) => ({
+      command: "npx",
+      args: ["tsx", "src/index.ts"],
+      env: {
+        CLOCKODO_API_USER: config.clockodoApiUser,
+        CLOCKODO_API_KEY: config.clockodoApiKey
+      }
+    })

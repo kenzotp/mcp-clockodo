@@ -340,13 +340,15 @@ server.registerTool(
 );
 
 async function main() {
+  // Initialize even without credentials (directory scanners run the server
+  // cold); tool calls fail with a clear message instead.
+  await server.connect(new StdioServerTransport());
   if (!API_USER || !API_KEY) {
     process.stderr.write(
       "mcp-clockodo: set CLOCKODO_API_USER and CLOCKODO_API_KEY environment variables (Clockodo → My settings → API).\n",
     );
-    process.exit(1);
+    return;
   }
-  await server.connect(new StdioServerTransport());
   process.stderr.write("mcp-clockodo running on stdio\n");
 }
 

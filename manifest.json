@@ -1,0 +1,26 @@
+{
+  "manifest_version": "0.2",
+  "name": "mcp-clockodo",
+  "display_name": "Clockodo MCP Server (unofficial)",
+  "version": "0.1.0",
+  "description": "Unofficial MCP server for the Clockodo time-tracking API. Read tools for daily use, guarded write tools with explicit confirmation for destructive actions.",
+  "author": { "name": "Mika Niedbala" },
+  "license": "MIT",
+  "keywords": ["mcp", "clockodo", "time-tracking", "model-context-protocol"],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "CLOCKODO_API_USER": "${user_config.clockodoApiUser}",
+        "CLOCKODO_API_KEY": "${user_config.clockodoApiKey}"
+      }
+    }
+  },
+  "user_config": {
+    "clockodoApiUser": { "type": "string", "title": "Clockodo API user (e-mail)", "description": "Your Clockodo API e-mail (Clockodo > Extensions > API).", "required": true },
+    "clockodoApiKey": { "type": "string", "title": "Clockodo API key", "description": "Your Clockodo API key (Clockodo > Extensions > API).", "required": true, "sensitive": true }
+  }
+}

@@ -18,8 +18,15 @@ export class ClockodoClient {
     private apiUser: string,
     private apiKey: string,
     private fetchImpl: typeof fetch = fetch,
-  ) {
-    if (!apiUser || !apiKey) throw new Error("CLOCKODO_API_USER and CLOCKODO_API_KEY are required");
+  ) {}
+
+  /** Credentials are checked per request, not at construction: directory
+   *  scanners start the server cold (no env) and expect a clean MCP handshake. */
+  private credsOrThrow() {
+    if (!this.apiUser || !this.apiKey) {
+      throw new ClockodoError(0, "CLOCKODO_API_USER and CLOCKODO_API_KEY are required");
+    }
+    return { user: this.apiUser, key: this.apiKey };
   }
 
   async get<T = any>(path: string, query: Record<string, string | number | undefined> = {}): Promise<T> {
@@ -85,6 +92,7 @@ export class ClockodoClient {
   }
 
   private async request<T>(doFetch: () => Promise<Response>): Promise<T> {
+    this.credsOrThrow();
     const res = await doFetch().catch((err: unknown) => {
       throw new ClockodoError(0, `network error: ${err instanceof Error ? err.message : String(err)}`);
     });
